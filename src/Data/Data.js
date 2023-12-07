@@ -14,18 +14,22 @@ export const SidebarData = [
   {
     icon: UilEstate,
     heading: "Home",
+    path: "/",
   },
   {
     icon: UilClipboardAlt,
     heading: "Portfolio Optimization",
+    path: "/portfolio",
   },
   {
     icon: UilUsersAlt,
     heading: "Executions",
+    path: "/executions",
   },
   {
     icon: UilChart,
     heading: "Analytics",
+    path: "/analytics",
   },
 ];
 

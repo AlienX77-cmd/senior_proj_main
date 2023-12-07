@@ -20,8 +20,8 @@
     #ffcfd1 51.55%,
     #f3c6f1 90.85%
   );
-  width: 100%;
-  height: 100%;
+  width: 1452px;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,8 +30,8 @@
 
 .AppGlass {
   display: grid;
-  height: 100%;
-  width: 100%;
+  height: 97%;
+  width: 97%;
   background: var(--glass);
   border-radius: 2rem;
   gap: 16px;

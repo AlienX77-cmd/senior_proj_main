@@ -9,7 +9,17 @@ body {
   background-color: #f4f4f4;
 }
 
-.container {
+.container1 {
+  background-color: #ffffff;
+  display: grid;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.container2 {
   background-color: #ffffff;
   display: grid;
   padding: 20px;
@@ -31,14 +41,14 @@ select {
 
 button {
   padding: 8px;
-  background-color: #4caf50;
+  background-color: #4890dd;
   color: #fff;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #55a3f8;
 }
 
 ul {
@@ -52,5 +62,4 @@ li {
 
 p {
   margin-top: 10px;
-  font-weight: bold;
 }

@@ -24,7 +24,7 @@ const StockCard = () => {
   const handleAddStock = () => {
     if (
       selectedStock &&
-      selectedStocksList.length < 10 &&
+      selectedStocksList.length < 5 &&
       !selectedStocksList.includes(selectedStock)
     ) {
       setSelectedStocksList([...selectedStocksList, selectedStock]);
@@ -37,48 +37,59 @@ const StockCard = () => {
     setSelectedTechnique(selectedTechnique);
   };
 
+  const labelStyle = {
+    fontSize: "25px", // Adjust the size as needed
+  };
+
   return (
-    <div className="container">
-      <div>
-        <label>Select Stock:</label>
-        <select value={selectedStock} onChange={handleStockSelection}>
-          <option value="" disabled>
-            Select a stock
-          </option>
-          {stockOptions.map((stock, index) => (
-            <option key={index} value={stock}>
-              {stock}
+    <div>
+      <div className="container1">
+        <div>
+          <label style={labelStyle}>
+            <b>Select Stock:</b>
+          </label>
+          <select value={selectedStock} onChange={handleStockSelection}>
+            <option value="" disabled>
+              Select a stock
             </option>
-          ))}
-        </select>
-        <button onClick={handleAddStock}>Add Stock</button>
-      </div>
+            {stockOptions.map((stock, index) => (
+              <option key={index} value={stock}>
+                {stock}
+              </option>
+            ))}
+          </select>
+          <button onClick={handleAddStock}>Add Stock</button>
+        </div>
 
-      <div>
-        <h3>Selected Stocks:</h3>
-        <ul>
-          {selectedStocksList.map((stock, index) => (
-            <li key={index}>{stock}</li>
-          ))}
-        </ul>
+        <div className="container2">
+          <h3>Selected Stocks:</h3>
+          <ul>
+            {selectedStocksList.map((stock, index) => (
+              <li key={index}>{stock}</li>
+            ))}
+          </ul>
+        </div>
       </div>
-
-      <div>
-        <label>Select Portfolio Optimization Technique:</label>
-        <select value={selectedTechnique} onChange={handleTechniqueSelection}>
-          <option value="" disabled>
-            Select a technique
-          </option>
-          {techniqueOptions.map((technique, index) => (
-            <option key={index} value={technique}>
-              {technique}
+      <div className="container1">
+        <div>
+          <label>
+            <b>Select Portfolio Optimization Technique:</b>
+          </label>
+          <select value={selectedTechnique} onChange={handleTechniqueSelection}>
+            <option value="" disabled>
+              Select a technique
             </option>
-          ))}
-        </select>
-      </div>
+            {techniqueOptions.map((technique, index) => (
+              <option key={index} value={technique}>
+                {technique}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div>
-        {selectedTechnique && <p>Selected Technique: {selectedTechnique}</p>}
+        <div>
+          {selectedTechnique && <p>Selected Technique: {selectedTechnique}</p>}
+        </div>
       </div>
     </div>
   );

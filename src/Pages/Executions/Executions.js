@@ -1,7 +1,16 @@
-import React from "react";
+import "./Executions.css";
+
+import Sidebar from "../../Components/Sidebar/Sidebar";
 
 function Executions() {
-  return <div>Executions</div>;
+  return (
+    <div className="App">
+      <div className="AppGlass">
+        <Sidebar />
+        <p>Executions</p>
+      </div>
+    </div>
+  );
 }
 
 export default Executions;

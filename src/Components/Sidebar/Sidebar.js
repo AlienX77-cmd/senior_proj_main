@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
 import Logo_bank from "../../imgs/logo_bank.png";
-import { UilSignOutAlt } from "@iconscout/react-unicons";
 import { SidebarData } from "../../Data/Data";
 import { UilBars } from "@iconscout/react-unicons";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const [selected, setSelected] = useState(0);
-
-  const [expanded, setExpaned] = useState(true);
+  const [selected, setSelected] = useState(null);
+  const [expanded, setExpanded] = useState(true);
 
   const sidebarVariants = {
     true: {
@@ -20,13 +18,17 @@ const Sidebar = () => {
       left: "-60%",
     },
   };
-  console.log(window.innerWidth);
+
+  const handleItemClick = (index) => {
+    setSelected(index === selected ? null : index);
+  };
+
   return (
     <>
       <div
         className="bars"
         style={expanded ? { left: "60%" } : { left: "5%" }}
-        onClick={() => setExpaned(!expanded)}
+        onClick={() => setExpanded(!expanded)}
       >
         <UilBars />
       </div>
@@ -44,25 +46,19 @@ const Sidebar = () => {
         </div>
 
         <div className="menu">
-          {SidebarData.map((item, index) => {
-            return (
-              <div
-                className={selected === index ? "menuItem active" : "menuItem"}
-                key={index}
-                onClick={() => setSelected(index)}
-              >
-                <item.icon />
-                {/* <span>{item.heading}</span> */}
-                <NavLink to={item.path}>
-                  <span>{item.heading}</span>
-                </NavLink>
-              </div>
-            );
-          })}
+          {SidebarData.map((item, index) => (
+            <NavLink
+              to={item.path}
+              className={selected === index ? "menuItem active" : "menuItem"}
+              key={index}
+              onClick={() => handleItemClick(index)}
+            >
+              <item.icon />
+              <span>{item.heading}</span>
+            </NavLink>
+          ))}
           {/* signoutIcon */}
-          <div className="menuItem">
-            <UilSignOutAlt />
-          </div>
+          <div className="menuItem"></div>
         </div>
       </motion.div>
     </>

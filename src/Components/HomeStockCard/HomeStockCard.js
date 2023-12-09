@@ -72,7 +72,9 @@ const StockCard = () => {
               </option>
             ))}
           </select>
-          <button onClick={handleAddStock}>Add Stock</button>
+          <button className="Add" onClick={handleAddStock}>
+            Add Stock
+          </button>
         </div>
 
         <div className="container2">
@@ -92,7 +94,7 @@ const StockCard = () => {
           </ul>
         </div>
       </div>
-      <div className="container1">
+      <div className="container3">
         <div>
           <label>
             <b>Select Portfolio Optimization Technique:</b>

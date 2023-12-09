@@ -4,9 +4,10 @@
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 15px;
+  margin-top: 50px;
   margin-bottom: 10px;
   margin-left: 10px;
+  width: 800px;
 }
 
 .container2 {
@@ -19,10 +20,22 @@
 
   /* Set your desired height and width values */
   height: auto; /* or set a specific height */
-  width: 1000px;
+  width: 780px;
 
   /* Create rows for each stock name */
   grid-template-rows: auto; /* This will make each row adjust to the content height */
+}
+
+.container3 {
+  background-color: #ffffff;
+  display: grid;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  width: 800px;
 }
 
 .stock-name {
@@ -40,7 +53,7 @@ select {
   margin-right: 10px;
 }
 
-button {
+.Add {
   padding: 8px;
   background-color: #4890dd;
   height: 36px;
@@ -51,7 +64,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.Add:hover {
   background-color: #55a3f8;
 }
 
@@ -78,11 +91,14 @@ button:hover {
 
 .Remove {
   background-color: #dd4848;
-  height: 35px;
-  width: 70px;
+  height: 25px;
+  width: 60px;
   color: #fff;
   cursor: pointer;
   margin-left: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 12px;
 }
 
 .Remove:hover {
@@ -97,14 +113,9 @@ ul {
 }
 
 li {
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 
 p {
   margin-top: 10px;
-}
-
-img {
-  width: 200px;
-  height: 200px;
 }

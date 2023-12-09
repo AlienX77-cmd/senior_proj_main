@@ -1,20 +1,86 @@
-.portfolio-optimization-page {
+.Card {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* This is fine if you want two columns of equal width */
+  column-gap: 20px; /* Adjust the gap between columns */
+  row-gap: 20px; /* Adjust the gap between rows */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  width: 800px;
+  height: 530px;
+}
+
+.Card div {
+  grid-column: 2; /* Position the div in the second column */
+  grid-row: span 2; /* Make the div span 2 rows */
+  /* If you want the contents to be centered both horizontally and vertically */
   display: flex;
+  align-items: center; /* This centers the items vertically */
+  justify-content: center; /* This centers the items horizontally */
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  height: 100px;
 }
 
-.chart-container {
+.Card2 {
+  background-color: #ffffff;
+
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column; /* This will stack children vertically */
+  justify-content: flex-start; /* Aligns children to the start of the flex container */
+  align-items: center; /* Centers children horizontally */
+
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+
+  /* Set your desired height and width values */
+  height: 490px; /* or set a specific height */
+  width: 280px;
 }
 
-.chart-card {
-  width: 30%;
-  text-align: center;
-  margin: 10px;
+.card-header {
+  font-weight: bold;
+  margin-bottom: 8px; /* Reduced gap */
+  padding-top: 0px; /* Space from the top of the card */
+
+  /* Any additional styling you want for the header */
+  align-self: flex-start; /* This aligns the header to the start of the flex container */
+  width: 100%; /* This ensures the header takes the full width of the container */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column; /* Stacks the <p> elements vertically */
+  align-items: flex-start; /* Aligns the <p> elements to the left */
+  width: 100%; /* Ensures the content takes full width */
+  /* ... other properties ... */
+}
+
+.card-body p {
+  margin-bottom: 8px; /* This adds space between the <p> elements */
+  /* ... other properties ... */
+}
+
+.card-body ol {
+  padding-left: 20px; /* Adjust the padding to align with your design */
+  list-style-type: decimal; /* Use any other style if preferred */
+}
+
+.card-body li {
+  margin-bottom: 5px; /* Space between list items */
+  /* Additional styles */
+}
+
+.port {
+  width: 400px;
+  height: 400px;
+  margin: 30px;
+  margin-top: 80px;
 }
 
 /* You can adjust widths and margins based on your design preferences */

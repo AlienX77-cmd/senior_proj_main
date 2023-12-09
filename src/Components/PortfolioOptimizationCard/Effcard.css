@@ -1,0 +1,28 @@
+.Card_Eff {
+  background-color: #ffffff;
+
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+
+  /* Set your desired height and width values */
+  height: 560px; /* or set a specific height */
+  width: 290px;
+
+  text-align: center; /* Centers the text horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the content (including image) vertically in the flex container */
+  justify-content: center; /* Centers the content horizontally in the flex container */
+}
+
+.Card_Eff p {
+  font-weight: bold; /* Makes the text bold */
+}
+
+.eff {
+  width: 250px;
+  height: 200px;
+  margin-left: 10px;
+  margin-top: 30px;
+}

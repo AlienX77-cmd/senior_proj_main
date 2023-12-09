@@ -1,0 +1,20 @@
+.portfolio-optimization-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.chart-card {
+  width: 30%;
+  text-align: center;
+  margin: 10px;
+}
+
+/* You can adjust widths and margins based on your design preferences */

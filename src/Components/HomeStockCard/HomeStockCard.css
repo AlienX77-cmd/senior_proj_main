@@ -12,21 +12,33 @@ body {
 .container1 {
   background-color: #ffffff;
   display: grid;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .container2 {
   background-color: #ffffff;
   display: grid;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+
+  /* Set your desired height and width values */
+  height: auto; /* or set a specific height */
+  width: 1000px;
+
+  /* Create rows for each stock name */
+  grid-template-rows: auto; /* This will make each row adjust to the content height */
+}
+
+.stock-name {
+  /* Add any additional styling you want for the stock names */
+  font-weight: bold;
 }
 
 label {
@@ -42,6 +54,9 @@ select {
 button {
   padding: 8px;
   background-color: #4890dd;
+  height: 36px;
+  width: 90px;
+  border-radius: 18px;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -49,6 +64,41 @@ button {
 
 button:hover {
   background-color: #55a3f8;
+}
+
+.Submit {
+  padding: 8px;
+  background-color: #4890dd;
+  height: 36px;
+  width: 90px;
+  border-radius: 18px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+
+  /* Position at the bottom center */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.Submit:hover {
+  background-color: #55a3f8;
+}
+
+.Remove {
+  background-color: #dd4848;
+  height: 35px;
+  width: 70px;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.Remove:hover {
+  opacity: 0.8;
+  background-color: #dd4848;
 }
 
 ul {
@@ -62,4 +112,9 @@ li {
 
 p {
   margin-top: 10px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
 }

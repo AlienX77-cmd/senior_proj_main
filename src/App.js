@@ -7,7 +7,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Portfolio from "./Pages/Portfolio/Portfolio";
 import Executions from "./Pages/Executions/Executions";
-import Analytics from "./Pages/Analytics/Analytics";
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="executions" element={<Executions />} />
-        <Route path="analytics" element={<Analytics />} />
       </Routes>
     </div>
   );

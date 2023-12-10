@@ -1,0 +1,28 @@
+.user-input-card {
+  /* Add the same styling as your center card for consistency */
+  margin-top: 50px;
+  padding: 16px;
+  box-shadow: var(--boxShadow);
+  border-radius: 8px;
+  background-color: white;
+  height: 200px;
+  width: 265px;
+}
+
+.input-group {
+  margin-bottom: 16px;
+  margin-top: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

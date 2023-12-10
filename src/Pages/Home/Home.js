@@ -2,6 +2,7 @@ import "./Home.css";
 // import Sidebar from "../../Components/Sidebar/Sidebar";
 import HomeStockCard from "../../Components/HomeStockCard/HomeStockCard";
 import Sidebar from "../../Components/Sidebar/Sidebar";
+import HomeRightSide from "../../Components/HomeStockCard/HomeRightSide";
 
 function Home() {
   return (
@@ -9,6 +10,7 @@ function Home() {
       <div className="AppGlass">
         <Sidebar />
         <HomeStockCard />
+        <HomeRightSide />
       </div>
     </div>
   );

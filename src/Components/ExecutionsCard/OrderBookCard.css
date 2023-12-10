@@ -1,0 +1,55 @@
+.order-book-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: var(--boxShadow);
+  padding: 1rem;
+  font-family: "Inter", sans-serif;
+  width: fit-content;
+}
+
+.order-book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.order-book-header h2 {
+  margin: 0;
+  color: var(--black);
+}
+
+.export-button {
+  background-color: var(--purple);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.order-book-details p {
+  margin: 0.5rem 0;
+}
+
+.order-book-details span {
+  font-weight: bold;
+}
+
+.order-book-table {
+  overflow-x: auto;
+}
+
+.order-book-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-book-table th,
+.order-book-table td {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--gray);
+}
+
+/* Additional styling as needed */

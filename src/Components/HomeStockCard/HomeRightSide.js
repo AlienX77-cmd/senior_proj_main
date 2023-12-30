@@ -18,8 +18,17 @@ const HomeRightSide = () => {
           <input
             type="number"
             id="total-volume"
+            min="4"
+            max="1000000000000"
+            step="any" // to allow decimal numbers
             value={totalVolume}
             onChange={(e) => setTotalVolume(e.target.value)}
+            onKeyPress={(event) => {
+              // Prevent non-numeric characters
+              if (!/[0-9]/.test(event.key) && event.key !== ".") {
+                event.preventDefault();
+              }
+            }}
           />
         </div>
 

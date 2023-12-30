@@ -7,10 +7,106 @@ const StockCard = () => {
   const [selectedStocksList, setSelectedStocksList] = useState([]);
 
   const stockOptions = [
-    "Stock1",
-    "Stock2",
-    "Stock3",
-    "Stock4" /* Add SET50 stocks here */,
+    "AAV",
+    "ACE",
+    "ADVANC",
+    "AMATA",
+    "AOT",
+    "AP",
+    "AURA",
+    "AWC",
+    "BAM",
+    "BANPU",
+    "BBL",
+    "BCH",
+    "BCP",
+    "BCPG",
+    "BDMS",
+    "BEM",
+    "BGRIM",
+    "BH",
+    "BLA",
+    "BSRC",
+    "BTG",
+    "BTS",
+    "BYD",
+    "CBG",
+    "CENTEL",
+    "CHG",
+    "CK",
+    "CKP",
+    "COM7",
+    "CPALL",
+    "CPF",
+    "CPN",
+    "CRC",
+    "DELTA",
+    "DOHOME",
+    "EA",
+    "EGCO",
+    "ERW",
+    "FORTH",
+    "GLOBAL",
+    "GPSC",
+    "GULF",
+    "GUNKUL",
+    "HANA",
+    "HMPRO",
+    "INTUCH",
+    "IRPC",
+    "IVL",
+    "JMART",
+    "JMT",
+    "KBANK",
+    "KCE",
+    "KKP",
+    "KTB",
+    "KTC",
+    "LH",
+    "MBK",
+    "MEGA",
+    "MINT",
+    "MTC",
+    "NEX",
+    "OR",
+    "ORI",
+    "OSP",
+    "PLANB",
+    "PSL",
+    "PTG",
+    "PTT",
+    "PTTEP",
+    "PTTGC",
+    "RATCH",
+    "RCL",
+    "SABUY",
+    "SAWAD",
+    "SCB",
+    "SCC",
+    "SCGP",
+    "SIRI",
+    "SJWD",
+    "SNNP",
+    "SPALI",
+    "SPRC",
+    "STA",
+    "STEC",
+    "STGT",
+    "TASCO",
+    "TCAP",
+    "THANI",
+    "THG",
+    "TIDLOR",
+    "TIPH",
+    "TISCO",
+    "TLI",
+    "TOP",
+    "TQM",
+    "TRUE",
+    "TTB",
+    "TU",
+    "VGI",
+    "WHA",
   ];
   const techniqueOptions = [
     "Minimise risk for a given return",
@@ -23,13 +119,17 @@ const StockCard = () => {
   };
 
   const handleAddStock = () => {
-    if (
-      selectedStock &&
-      selectedStocksList.length < 5 &&
-      !selectedStocksList.includes(selectedStock)
-    ) {
+    // Check if the user is trying to add more than 4 stocks
+    if (selectedStocksList.length >= 4) {
+      // Alert the user that they can only add up to 4 stocks
+      alert("You can only add up to 4 stocks.");
+      return; // Exit the function to prevent more stocks from being added
+    }
+
+    // Your existing logic to add a stock
+    if (selectedStock && !selectedStocksList.includes(selectedStock)) {
       setSelectedStocksList([...selectedStocksList, selectedStock]);
-      setSelectedStock("");
+      setSelectedStock(""); // Clear the selection
     }
   };
 
@@ -82,7 +182,7 @@ const StockCard = () => {
           <ul>
             {selectedStocksList.map((stock, index) => (
               <li key={index}>
-                {stock}
+                {index + 1}. {stock}
                 <button
                   className="Remove"
                   onClick={() => handleRemoveStock(stock)}
@@ -117,10 +217,19 @@ const StockCard = () => {
             <div>
               <label htmlFor="returnInput">Enter Desired Return:</label>
               <input
-                type="text"
+                type="number"
                 id="returnInput"
+                min="0.01" // to allow only positive numbers greater than zero
+                max="100"
+                step="any" // to allow decimal numbers
                 value={userInput}
                 onChange={handleInputChange}
+                onKeyPress={(event) => {
+                  // Prevent non-numeric characters
+                  if (!/[0-9]/.test(event.key) && event.key !== ".") {
+                    event.preventDefault();
+                  }
+                }}
               />
             </div>
           )}
@@ -129,10 +238,19 @@ const StockCard = () => {
             <div>
               <label htmlFor="riskInput">Enter Maximum Risk:</label>
               <input
-                type="text"
+                type="number"
                 id="riskInput"
+                min="0.01" // to allow only positive numbers greater than zero
+                max="100"
+                step="any" // to allow decimal numbers
                 value={userInput}
                 onChange={handleInputChange}
+                onKeyPress={(event) => {
+                  // Prevent non-numeric characters
+                  if (!/[0-9]/.test(event.key) && event.key !== ".") {
+                    event.preventDefault();
+                  }
+                }}
               />
             </div>
           )}

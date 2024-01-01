@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./HomeStockCard.css";
 
-const StockCard = () => {
+const StockCard = ({
+  selectedStocksList,
+  selectedTechnique,
+  userInput,
+  onPortfolioChange,
+}) => {
   const [selectedStock, setSelectedStock] = useState("");
-  const [selectedTechnique, setSelectedTechnique] = useState("");
-  const [selectedStocksList, setSelectedStocksList] = useState([]);
-  const [userInput, setUserInput] = useState(""); // This state should be used for the input value
 
   // Add state to capture the desired return or risk based on the selected technique
   const [formInput, setFormInput] = useState({
@@ -135,62 +137,30 @@ const StockCard = () => {
 
     // Your existing logic to add a stock
     if (selectedStock && !selectedStocksList.includes(selectedStock)) {
-      setSelectedStocksList([...selectedStocksList, selectedStock]);
-      setSelectedStock(""); // Clear the selection
+      onPortfolioChange("selectedStocksList", [
+        ...selectedStocksList,
+        selectedStock,
+      ]);
+      onPortfolioChange("selectedStock", ""); // Clear the selection
     }
   };
 
-  const handleRemoveStock = (removedStock) => {
+  const handleRemoveStock = (stockToRemove) => {
     const updatedStocksList = selectedStocksList.filter(
-      (stock) => stock !== removedStock
+      (stock) => stock !== stockToRemove
     );
-    setSelectedStocksList(updatedStocksList);
-  };
-
-  // This handler will be called when the form is submitted
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Ensure that userInput is converted to a float
-    const inputValueFloat = parseFloat(userInput);
-
-    // Check if the userInput is a number before sending
-    if (isNaN(inputValueFloat)) {
-      alert("Please enter a valid number for the desired return.");
-      return; // Exit the function if not a number
-    }
-
-    // Construct the payload to be sent to the backend
-    const payload = {
-      tickers: selectedStocksList,
-      constraint: selectedTechnique, // Make sure this state holds the selected technique
-      inputValue: inputValueFloat, // Send the parsed float value
-    };
-
-    // Send the payload to your backend using fetch or another HTTP client
-    // Remember to handle errors and set up the correct endpoint
-    const response = await fetch("http://127.0.0.1:5000/portfolio", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await response.json();
-    // Handle the response data - maybe set some state or alert the user
-    console.log(data);
+    onPortfolioChange("selectedStocksList", updatedStocksList);
   };
 
   // Update the technique selection handler to also handle input changes
   const handleTechniqueSelection = (e) => {
-    setSelectedTechnique(e.target.value);
+    onPortfolioChange("selectedTechnique", e.target.value);
     setFormInput({ ...formInput, technique: e.target.value });
   };
 
   // Update the input change handler to update the formInput state
   const handleInputChange = (e) => {
-    setUserInput(e.target.value);
+    onPortfolioChange("userInput", e.target.value);
   };
 
   const labelStyle = {
@@ -198,117 +168,107 @@ const StockCard = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <div className="container1">
-          <div>
-            <label style={labelStyle}>
-              <b>Select Stock:</b>
-            </label>
-            <select value={selectedStock} onChange={handleStockSelection}>
-              <option value="" disabled>
-                Select a stock
+    <div>
+      <div className="container1">
+        <div>
+          <label style={labelStyle}>
+            <b>Select Stock:</b>
+          </label>
+          <select value={selectedStock} onChange={handleStockSelection}>
+            <option value="" disabled>
+              Select a stock
+            </option>
+            {stockOptions.map((stock, index) => (
+              <option key={index} value={stock}>
+                {stock}
               </option>
-              {stockOptions.map((stock, index) => (
-                <option key={index} value={stock}>
-                  {stock}
-                </option>
-              ))}
-            </select>
-            <button type="button" className="Add" onClick={handleAddStock}>
-              Add Stock
-            </button>
-          </div>
-
-          <div className="container2">
-            <h3>Selected Stocks:</h3>
-            <ul>
-              {selectedStocksList.map((stock, index) => (
-                <li key={index}>
-                  {index + 1}. {stock}
-                  <button
-                    className="Remove"
-                    onClick={() => handleRemoveStock(stock)}
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+            ))}
+          </select>
+          <button type="button" className="Add" onClick={handleAddStock}>
+            Add Stock
+          </button>
         </div>
-        <div className="container3">
-          <div>
-            <label>
-              <b>Select Portfolio Optimization Technique:</b>
-            </label>
-            <select
-              value={selectedTechnique}
-              onChange={handleTechniqueSelection}
-            >
-              <option value="" disabled>
-                Select a technique
-              </option>
-              {techniqueOptions.map((technique, index) => (
-                <option key={index} value={technique}>
-                  {technique}
-                </option>
-              ))}
-            </select>
-          </div>
 
-          <div>
-            {selectedTechnique && (
-              <p>Selected Technique: {selectedTechnique}</p>
-            )}
-            {selectedTechnique === "Minimise risk for a given return" && (
-              <div>
-                <label htmlFor="returnInput">Enter Desired Return:</label>
-                <input
-                  type="number"
-                  id="returnInput"
-                  min="0.01" // to allow only positive numbers greater than zero
-                  max="100"
-                  step="any" // to allow decimal numbers
-                  value={userInput}
-                  onChange={handleInputChange}
-                  onKeyPress={(event) => {
-                    // Prevent non-numeric characters
-                    if (!/[0-9]/.test(event.key) && event.key !== ".") {
-                      event.preventDefault();
-                    }
-                  }}
-                />
-              </div>
-            )}
-            {selectedTechnique ===
-              "Maximise return for a given risk with L2 regularisation" && (
-              <div>
-                <label htmlFor="riskInput">Enter Maximum Risk:</label>
-                <input
-                  type="number"
-                  id="riskInput"
-                  min="0.01" // to allow only positive numbers greater than zero
-                  max="100"
-                  step="any" // to allow decimal numbers
-                  value={userInput}
-                  onChange={handleInputChange}
-                  onKeyPress={(event) => {
-                    // Prevent non-numeric characters
-                    if (!/[0-9]/.test(event.key) && event.key !== ".") {
-                      event.preventDefault();
-                    }
-                  }}
-                />
-              </div>
-            )}
-          </div>
+        <div className="container2">
+          <h3>Selected Stocks:</h3>
+          <ul>
+            {selectedStocksList.map((stock, index) => (
+              <li key={index}>
+                {index + 1}. {stock}
+                <button
+                  className="Remove"
+                  onClick={() => handleRemoveStock(stock)}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-      <button type="submit" className="Submit">
-        Submit
-      </button>
-    </form>
+      <div className="container3">
+        <div>
+          <label>
+            <b>Select Portfolio Optimization Technique:</b>
+          </label>
+          <select value={selectedTechnique} onChange={handleTechniqueSelection}>
+            <option value="" disabled>
+              Select a technique
+            </option>
+            {techniqueOptions.map((technique, index) => (
+              <option key={index} value={technique}>
+                {technique}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          {selectedTechnique && <p>Selected Technique: {selectedTechnique}</p>}
+          {selectedTechnique === "Minimise risk for a given return" && (
+            <div>
+              <label htmlFor="returnInput">Enter Desired Return:</label>
+              <input
+                type="number"
+                id="returnInput"
+                min="0.01" // to allow only positive numbers greater than zero
+                max="100"
+                step="any" // to allow decimal numbers
+                value={userInput}
+                onChange={handleInputChange}
+                onKeyPress={(event) => {
+                  // Prevent non-numeric characters
+                  if (!/[0-9]/.test(event.key) && event.key !== ".") {
+                    event.preventDefault();
+                  }
+                }}
+              />
+            </div>
+          )}
+          {selectedTechnique ===
+            "Maximise return for a given risk with L2 regularisation" && (
+            <div>
+              <label htmlFor="riskInput">Enter Maximum Risk:</label>
+              <input
+                type="number"
+                id="riskInput"
+                min="0.01" // to allow only positive numbers greater than zero
+                max="100"
+                step="any" // to allow decimal numbers
+                value={userInput}
+                onChange={handleInputChange}
+                onKeyPress={(event) => {
+                  // Prevent non-numeric characters
+                  if (!/[0-9]/.test(event.key) && event.key !== ".") {
+                    event.preventDefault();
+                  }
+                }}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./HomeRightSide.css";
 import { Card } from "react-bootstrap";
 
-const HomeRightSide = () => {
-  const [totalVolume, setTotalVolume] = useState("");
-  const [duration, setDuration] = useState("");
-
+const HomeRightSide = ({ totalVolume, duration, onPortfolioChange }) => {
   return (
     <Card className="user-input-card">
       <Card.Body>
@@ -22,7 +19,7 @@ const HomeRightSide = () => {
             max="1000000000000"
             step="any" // to allow decimal numbers
             value={totalVolume}
-            onChange={(e) => setTotalVolume(e.target.value)}
+            onChange={(e) => onPortfolioChange("totalVolume", e.target.value)}
             onKeyPress={(event) => {
               // Prevent non-numeric characters
               if (!/[0-9]/.test(event.key) && event.key !== ".") {
@@ -37,7 +34,7 @@ const HomeRightSide = () => {
           <select
             id="duration"
             value={duration}
-            onChange={(e) => setDuration(e.target.value)}
+            onChange={(e) => onPortfolioChange("duration", e.target.value)}
           >
             <option value="">Select Duration</option>
             <option value="3h">3 hours</option>

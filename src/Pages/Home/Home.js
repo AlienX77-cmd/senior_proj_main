@@ -57,6 +57,12 @@ function Home() {
       const data = await response.json();
       // Handle the response data - maybe set some state or alert the user
       console.log(data);
+
+      // Save the response data to localStorage
+      localStorage.setItem("portfolioData", JSON.stringify(data));
+
+      // Redirect to /portfolio page
+      window.location.href = "/portfolio";
     } catch (error) {
       // Handle any errors that occurred during the fetch
       console.error("There was an error with the portfolio submission:", error);

@@ -129,9 +129,9 @@ const StockCard = ({
 
   const handleAddStock = () => {
     // Check if the user is trying to add more than 4 stocks
-    if (selectedStocksList.length >= 4) {
+    if (selectedStocksList.length >= 5) {
       // Alert the user that they can only add up to 4 stocks
-      alert("You can only add up to 4 stocks.");
+      alert("You can only add up to 5 stocks.");
       return; // Exit the function to prevent more stocks from being added
     }
 
@@ -141,7 +141,7 @@ const StockCard = ({
         ...selectedStocksList,
         selectedStock,
       ]);
-      onPortfolioChange("selectedStock", ""); // Clear the selection
+      // onPortfolioChange("selectedStock", ""); // Clear the selection
     }
   };
 
@@ -227,7 +227,7 @@ const StockCard = ({
           {selectedTechnique && <p>Selected Technique: {selectedTechnique}</p>}
           {selectedTechnique === "Minimise risk for a given return" && (
             <div>
-              <label htmlFor="returnInput">Enter Desired Return:</label>
+              <label htmlFor="returnInput">Enter Desired Return (in %):</label>
               <input
                 type="number"
                 id="returnInput"
@@ -248,7 +248,7 @@ const StockCard = ({
           {selectedTechnique ===
             "Maximise return for a given risk with L2 regularisation" && (
             <div>
-              <label htmlFor="riskInput">Enter Maximum Risk:</label>
+              <label htmlFor="riskInput">Enter Maximum Risk (in %):</label>
               <input
                 type="number"
                 id="riskInput"

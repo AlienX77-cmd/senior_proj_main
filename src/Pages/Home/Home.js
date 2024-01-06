@@ -62,7 +62,7 @@ function Home() {
       localStorage.setItem("portfolioData", JSON.stringify(data));
 
       // Redirect to /portfolio page
-      window.location.href = "/portfolio";
+      // window.location.href = "/portfolio";
     } catch (error) {
       // Handle any errors that occurred during the fetch
       console.error("There was an error with the portfolio submission:", error);

@@ -16,10 +16,6 @@
   justify-content: center; /* Centers the content horizontally in the flex container */
 }
 
-.Card_Eff p {
-  font-weight: bold; /* Makes the text bold */
-}
-
 .eff {
   width: 250px;
   height: 200px;

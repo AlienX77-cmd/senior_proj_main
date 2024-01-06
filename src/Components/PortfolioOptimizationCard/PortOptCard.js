@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import EffCard from "./Effcard"; // Adjust the import path as necessary
 import "./PortOptCard.css";
 
 const PortfolioOptimizationPage = () => {
@@ -32,6 +33,9 @@ const PortfolioOptimizationPage = () => {
 
   // Check if portfolio data is available
   const hasPortfolioData = portfolioData && portfolioData.pie_chart_b64;
+
+  // Assuming 'efficient_frontier_b64' is the key you've used in your backend response
+  const effImageUrl = portfolioData ? portfolioData.ef : "";
 
   // If data is not available, show the default content
   if (!hasPortfolioData) {
@@ -103,6 +107,7 @@ const PortfolioOptimizationPage = () => {
           </div>
         </div>
       </div>
+      <EffCard effImageUrl={effImageUrl} />
     </>
   );
 };

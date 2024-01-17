@@ -7,10 +7,10 @@ const PortfolioOptimizationPage = () => {
     JSON.parse(localStorage.getItem("portfolioData"))
   );
 
-  // Clear the localStorage after fetching data
-  useEffect(() => {
-    localStorage.removeItem("portfolioData");
-  }, []);
+  // // Clear the localStorage after fetching data
+  // useEffect(() => {
+  //   localStorage.removeItem("portfolioData");
+  // }, []);
 
   useEffect(() => {
     // Fetch the portfolio data when the component mounts

@@ -1,50 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Executions.css";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import OrderBookCard from "../../Components/ExecutionsCard/OrderBookCard";
+import axios from "axios";
 
 function Executions() {
-  const [selectedStocks] = useState(() => {
-    const savedData = localStorage.getItem("portfolioData");
-    const portfolioData = savedData ? JSON.parse(savedData) : null;
+  const [selectedStocks, setSelectedStocks] = useState([]);
 
-    if (portfolioData && portfolioData["volume for each stock"]) {
-      // Assuming that 'volume for each stock' contains the ticker and the volume
-      return Object.entries(portfolioData["volume for each stock"]).map(
-        ([ticker, volume]) => ({
-          ticker: ticker.replace(".BK", ""), // ticker from the key
-          side: "Long", // assuming side is Long, you can adjust this based on your data
-          order_volume: volume, // volume from the value
-          no_order: "50", // hardcoded for now, adjust if you have this data
-          avg: "100", // hardcoded for now, adjust if you have this data
-          vwap: "105", // hardcoded for now, adjust if you have this data
-          diff: "-0.05", // hardcoded for now, adjust if you have this data
-          csv_format: [
-            ["Time", "Volume", "Price (THB)", "Order type"], // if you have CSV data, place it here
-            ["14:36", "19,000", "84.5", "MO"],
-            // ... more rows
-          ],
-          result: [
-            { time: "14:36", volume: "19,000", price: "84.5", otype: "MO" },
-            { time: "14:37", volume: "100", price: "84.5", otype: "MO" },
-            { time: "14:45", volume: "100", price: "83.0", otype: "MO" },
-            { time: "14:48", volume: "100", price: "83.0", otype: "LO" },
-          ], // if you have result data, place it here
-        })
-      );
-    }
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:5000/executions")
+  //     .then((response) => {
+  //       const metadata = response.data;
+  //       const transformedData = Object.entries(metadata).map(
+  //         ([ticker, data]) => ({
+  //           ticker,
+  //           side: "Long", // Assuming 'side' is not provided by the backend
+  //           order_volume: data.want,
+  //           no_order: data.plan.length,
+  //           avg: data.my_vwap.toFixed(2),
+  //           vwap: data.market_vwap.toFixed(2),
+  //           diff:
+  //             (
+  //               ((data.my_vwap - data.market_vwap) / data.market_vwap) *
+  //               100
+  //             ).toFixed(2) + "%",
+  //           csv_format: [["Time", "Volume", "Price"]], // Add a placeholder for CSV data
+  //           result: data.plan.map((order) => ({
+  //             time: order.TIME,
+  //             volume: order.LO_VOLUME + order.MO_VOLUME,
+  //             price: (order.LO_PRICE + order.MO_PRICE) / 2,
+  //             otype: order.LO_VOLUME > 0 ? "LO" : "MO",
+  //           })),
+  //         })
+  //       );
+  //       setSelectedStocks(transformedData);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching metadata:", error);
+  //     });
+  // }, []);
 
-    return []; // default to an empty array if no data
-  });
+  useEffect(() => {
+    const fetchExecutions = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/executions");
+        const transformedData = Object.entries(response.data).map(
+          ([ticker, data]) => ({
+            ticker,
+            side: "Long", // Assuming 'side' is not provided by the backend
+            order_volume: data.want,
+            no_order: data.plan.length,
+            avg: data.my_vwap.toFixed(2),
+            vwap: data.market_vwap.toFixed(2),
+            diff:
+              (
+                ((data.my_vwap - data.market_vwap) / data.market_vwap) *
+                100
+              ).toFixed(2) + "%",
+            csv_format: [["Time", "Volume", "Price"]], // Add a placeholder for CSV data
+            result: data.plan.map((order) => ({
+              time: order.TIME,
+              volume: order.LO_VOLUME + order.MO_VOLUME,
+              price: (order.LO_PRICE + order.MO_PRICE) / 2,
+              otype: order.LO_VOLUME > 0 ? "LO" : "MO",
+            })),
+          })
+        );
+        setSelectedStocks(transformedData);
+      } catch (error) {
+        console.error("Error fetching metadata:", error);
+      }
+    };
 
-  console.log(selectedStocks);
+    fetchExecutions(); // Initial fetch
 
-  // If there's no data, show a message or loading state
-  if (selectedStocks.length === 0) {
-    return (
-      <div>No stocks have been selected or portfolio data is unavailable.</div>
-    );
-  }
+    const intervalId = setInterval(fetchExecutions, 5000); // Poll every 5 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on unmount
+  }, []);
+
+  // ... rest of your component code
 
   return (
     <div className="App">

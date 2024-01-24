@@ -41,10 +41,6 @@ const HomeRightSide = ({ totalVolume, duration, onPortfolioChange }) => {
             <option value="6h">6 hours</option>
             <option value="9h">9 hours</option>
             <option value="12h">12 hours</option>
-            <option value="1d">1 day</option>
-            <option value="3d">3 days</option>
-            <option value="5d">5 days</option>
-            <option value="1w">1 week</option>
           </select>
         </div>
       </Card.Body>

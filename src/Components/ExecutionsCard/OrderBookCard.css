@@ -1,35 +1,45 @@
+/* OrderBookCard.css */
 .order-book-card {
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: var(--boxShadow);
-  padding: 1rem;
-  font-family: "Inter", sans-serif;
-  width: fit-content;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Adjust width as necessary */
+  margin: 20px; /* Spacing between cards */
+  overflow: hidden; /* Ensures the border-radius is applied to children */
 }
 
 .order-book-header {
+  background-color: #1e4b72; /* Replace with the color you want */
+  color: #ffffff;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
 }
 
-.order-book-header h2 {
-  margin: 0;
-  color: var(--black);
+.text-buy {
+  color: #00be08; /* Green for buy */
+}
+
+.text-sell {
+  color: #be0000; /* Red for sell */
 }
 
 .export-button {
-  background-color: var(--purple);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  background-color: #ffb216; /* Button background */
+  color: #ffffff; /* Button text color */
+  padding: 5px 10px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
+.order-book-details {
+  padding: 20px;
+  border-bottom: 1px solid #eaeaea; /* Separator line */
+}
+
 .order-book-details p {
-  margin: 0.5rem 0;
+  margin: 5px 0; /* Spacing between lines */
 }
 
 .order-book-details span {
@@ -37,19 +47,18 @@
 }
 
 .order-book-table {
-  overflow-x: auto;
+  padding: 10px;
 }
 
 .order-book-table table {
   width: 100%;
-  border-collapse: collapse;
+  text-align: left;
 }
 
 .order-book-table th,
 .order-book-table td {
-  text-align: left;
-  padding: 0.5rem;
-  border-bottom: 1px solid var(--gray);
+  padding: 8px;
+  border-bottom: 1px solid #eaeaea; /* Table row separator */
 }
 
-/* Additional styling as needed */
+/* You can remove unused parts from the original style.css and style2.css files and only include what is necessary for this component. */

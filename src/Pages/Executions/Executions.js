@@ -14,7 +14,8 @@ function Executions() {
         const transformedData = Object.entries(response.data).map(
           ([ticker, data]) => ({
             ticker,
-            side: "Long", // Assuming 'side' is not provided by the backend
+            // side: "Long", // Assuming 'side' is not provided by the backend
+            side: data.side,
             order_volume: data.want,
             no_order: data.plan.length,
             avg: data.my_vwap.toFixed(2),
@@ -27,8 +28,10 @@ function Executions() {
             result: data.plan.map((order) => ({
               time: order.TIME.join(":").replace(",", ":"),
               volume: order.LO_VOLUME + order.MO_VOLUME,
-              price: (order.LO_PRICE + order.MO_PRICE) / 2,
-              otype: order.LO_VOLUME > 0 ? "LO" : "MO",
+              price: parseFloat(
+                ((order.LO_PRICE + order.MO_PRICE) / 2).toFixed(3)
+              ), // Round to three decimals
+              otype: order.LO_VOLUME > 0 ? "LO" : "MO", // find way to work around because sometimes there are both LO and MO volume
             })),
           })
         );

@@ -15,8 +15,8 @@ const HomeRightSide = ({ totalVolume, duration, onPortfolioChange }) => {
           <input
             type="number"
             id="total-volume"
-            min="4"
-            max="1000000000000"
+            min="100"
+            max="1000000000"
             step="any" // to allow decimal numbers
             value={totalVolume}
             onChange={(e) => onPortfolioChange("totalVolume", e.target.value)}
@@ -39,8 +39,6 @@ const HomeRightSide = ({ totalVolume, duration, onPortfolioChange }) => {
             <option value="">Select Duration</option>
             <option value="3h">3 hours</option>
             <option value="6h">6 hours</option>
-            <option value="9h">9 hours</option>
-            <option value="12h">12 hours</option>
           </select>
         </div>
       </Card.Body>

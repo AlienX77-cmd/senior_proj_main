@@ -13,10 +13,10 @@ function CardOutput({ listOutput }) {
           <div className="grid-container">
             <div className="flex-container">
               <div className="name-ticker-output">{item.ticker} </div>
-              {item.side === "Long" ? (
-                <div className="font-type-buy">Long</div>
+              {item.side === 1 ? (
+                <div className="font-type-buy"></div>
               ) : (
-                <div className="font-type-sell">Short</div>
+                <div className="font-type-sell"></div>
               )}
             </div>
             <CSVLink
@@ -26,7 +26,9 @@ function CardOutput({ listOutput }) {
               }
               className="export"
             >
-              <div className="export-text">Export</div>
+              <div className="export-text">
+                {item.side === 1 ? "Long" : "Short"}
+              </div>
             </CSVLink>
 
             <div className="font-output">Order Volume</div>
